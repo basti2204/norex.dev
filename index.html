@@ -1,38 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Norex</title>
-  <style>
-    body {
-      margin: 0;
-      background: #0b0f14;
-      color: #e6e9ef;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, sans-serif;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-    }
-    .wrap {
-      text-align: center;
-    }
-    h1 {
-      font-size: 3rem;
-      letter-spacing: 0.04em;
-    }
-    p {
-      opacity: 0.7;
-      margin-top: 0.5rem;
-    }
-  </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>norex OS</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="wrap">
-    <h1>NOREX</h1>
-    <p>The operating system of the future
-    Coming soon...</p>
-  </div>
+
+<header class="nav">
+    <div class="logo">norex</div>
+    <nav>
+        <a href="#about">About</a>
+        <a href="#features">Features</a>
+        <a href="#architecture">Architecture</a>
+        <a href="#status">Status</a>
+    </nav>
+</header>
+
+<section class="hero">
+    <h1>norex</h1>
+    <p class="subtitle">
+        A modern experimental operating system<br>
+        built from scratch.
+    </p>
+</section>
+
+<section id="about" class="section">
+    <h2>What is norex?</h2>
+    <p>
+        norex is a custom operating system developed from the ground up.
+        It features a protected kernel, a real usermode, syscalls,
+        multitasking and a custom graphical interface.
+    </p>
+    <p>
+        The project focuses on understanding operating systems at the lowest
+        level — not abstraction, but control.
+    </p>
+</section>
+
+<section id="features" class="section dark">
+    <h2>Core Features</h2>
+    <ul class="features">
+        <li>Protected kernel (Ring 0)</li>
+        <li>Usermode processes (Ring 3)</li>
+        <li>Custom syscall interface</li>
+        <li>Multitasking & scheduler</li>
+        <li>Virtual memory & paging</li>
+        <li>Framebuffer-based GUI</li>
+    </ul>
+</section>
+
+<section id="architecture" class="section">
+    <h2>Architecture</h2>
+    <pre class="code">
+User Applications
+        ↓
+Syscall Interface
+        ↓
+Kernel Core
+- Scheduler
+- Memory Manager
+- IPC
+        ↓
+Hardware Abstraction
+    </pre>
+</section>
+
+<section id="status" class="section dark">
+    <h2>Project Status</h2>
+    <p>
+        norex is under active development.
+        Current focus areas:
+    </p>
+    <ul class="features">
+        <li>GUI system & window manager</li>
+        <li>Input devices (mouse / keyboard)</li>
+        <li>Filesystem extensions</li>
+        <li>Security & permissions</li>
+    </ul>
+</section>
+
+<footer class="footer">
+    <p>© norex OS — experimental system research</p>
+</footer>
+
 </body>
 </html>
