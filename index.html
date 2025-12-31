@@ -1,57 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta charset="UTF-8">
     <title>norex OS</title>
-    <link rel="stylesheet" href="./style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css?v=1">
+    <link rel="stylesheet" href="./animations.css">
 </head>
 <body>
 
-<header class="nav">
+<header class="nav glass">
     <div class="logo">norex</div>
     <nav>
         <a href="#about">About</a>
         <a href="#features">Features</a>
-        <a href="#architecture">Architecture</a>
-        <a href="#status">Status</a>
+        <a href="docs.html">Docs</a>
+        <a href="#downloads">Downloads</a>
     </nav>
 </header>
 
 <section class="hero">
-    <h1>norex</h1>
-    <p class="subtitle">
+    <h1 class="fade-in">norex</h1>
+    <p class="subtitle fade-in-delay">
         A modern experimental operating system<br>
         built from scratch.
     </p>
+    <div class="tagline fade-in-delay-2">
+        Kernel • Usermode • Control
+    </div>
 </section>
 
-<section id="about" class="section">
-    <h2>What is norex?</h2>
+<section id="about" class="section fade-up">
+    <h2>Why norex?</h2>
     <p>
-        norex is a custom operating system developed from the ground up.
-        It features a protected kernel, a real usermode, syscalls,
-        multitasking and a custom graphical interface.
-    </p>
-    <p>
-        The project focuses on understanding operating systems at the lowest
-        level — not abstraction, but control.
+        norex is not designed to compete with Linux or Windows.
+        It exists to explore how modern operating systems actually work —
+        from scheduling and paging down to syscalls and hardware control.
     </p>
 </section>
 
-<section id="features" class="section dark">
+<section id="features" class="section dark fade-up">
     <h2>Core Features</h2>
-    <ul class="features">
-        <li>Protected kernel (Ring 0)</li>
-        <li>Usermode processes (Ring 3)</li>
-        <li>Custom syscall interface</li>
-        <li>Multitasking & scheduler</li>
-        <li>Virtual memory & paging</li>
-        <li>Framebuffer-based GUI</li>
-    </ul>
+
+    <div class="cards">
+        <div class="card">
+            <h3>Protected Kernel</h3>
+            <p>Strict Ring 0 / Ring 3 separation with enforced memory protection.</p>
+        </div>
+        <div class="card">
+            <h3>Usermode</h3>
+            <p>Real userspace processes communicating via syscalls.</p>
+        </div>
+        <div class="card">
+            <h3>Multitasking</h3>
+            <p>Preemptive scheduler with isolated tasks.</p>
+        </div>
+        <div class="card">
+            <h3>Virtual Memory</h3>
+            <p>Paging, address spaces and memory safety.</p>
+        </div>
+        <div class="card">
+            <h3>Custom GUI</h3>
+            <p>Framebuffer-based window system without external toolkits.</p>
+        </div>
+    </div>
 </section>
 
-<section id="architecture" class="section">
+<section class="section fade-up">
     <h2>Architecture</h2>
     <pre class="code">
 User Applications
@@ -67,22 +82,34 @@ Hardware Abstraction
     </pre>
 </section>
 
-<section id="status" class="section dark">
-    <h2>Project Status</h2>
-    <p>
-        norex is under active development.
-        Current focus areas:
+<section class="section dark fade-up">
+    <h2>GUI Preview</h2>
+    <img class="preview" src="assets/screenshots/placeholder.png" alt="GUI Screenshot">
+    <img class="preview" src="assets/gifs/placeholder.gif" alt="GUI Animation">
+</section>
+
+<section id="downloads" class="section fade-up">
+    <h2>Downloads</h2>
+    <p class="muted">
+        Experimental builds. Not intended for production use.
     </p>
-    <ul class="features">
-        <li>GUI system & window manager</li>
-        <li>Input devices (mouse / keyboard)</li>
-        <li>Filesystem extensions</li>
-        <li>Security & permissions</li>
-    </ul>
+
+    <div class="cards">
+        <div class="card">
+            <h3>Nightly Build</h3>
+            <p>Latest experimental kernel & userspace.</p>
+            <button disabled>Coming Soon</button>
+        </div>
+        <div class="card">
+            <h3>Source Code</h3>
+            <p>Build norex from scratch.</p>
+            <button disabled>Private Repo</button>
+        </div>
+    </div>
 </section>
 
 <footer class="footer">
-    <p>© norex OS — experimental system research</p>
+    © norex OS — experimental system research
 </footer>
 
 </body>
