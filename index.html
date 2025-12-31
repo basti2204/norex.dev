@@ -2,8 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>norex OS</title>
+    <title>norex OS - Modern Experimental Operating System</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="norex is a modern experimental operating system built from scratch. Explore kernel development, usermode processes, and custom GUI systems.">
+    <meta name="keywords" content="operating system, OS development, kernel, experimental OS, norex">
     <link rel="stylesheet" href="./style.css?v=1">
     <link rel="stylesheet" href="./animations.css">
 </head>
@@ -14,6 +16,7 @@
     <nav>
         <a href="#about">About</a>
         <a href="#features">Features</a>
+        <a href="#getting-started">Getting Started</a>
         <a href="docs.html">Docs</a>
         <a href="#downloads">Downloads</a>
     </nav>
@@ -44,41 +47,71 @@
 
     <div class="cards">
         <div class="card">
+            <div class="card-icon">🛡️</div>
             <h3>Protected Kernel</h3>
-            <p>Strict Ring 0 / Ring 3 separation with enforced memory protection.</p>
+            <p>Strict Ring 0 / Ring 3 separation with enforced memory protection and privilege levels.</p>
         </div>
         <div class="card">
+            <div class="card-icon">👤</div>
             <h3>Usermode</h3>
-            <p>Real userspace processes communicating via syscalls.</p>
+            <p>Real userspace processes communicating via syscalls with full isolation and security.</p>
         </div>
         <div class="card">
+            <div class="card-icon">⚡</div>
             <h3>Multitasking</h3>
-            <p>Preemptive scheduler with isolated tasks.</p>
+            <p>Preemptive round-robin scheduler with context switching and isolated task management.</p>
         </div>
         <div class="card">
+            <div class="card-icon">💾</div>
             <h3>Virtual Memory</h3>
-            <p>Paging, address spaces and memory safety.</p>
+            <p>Full paging support with virtual address spaces, memory safety, and demand paging.</p>
         </div>
         <div class="card">
+            <div class="card-icon">🖥️</div>
             <h3>Custom GUI</h3>
-            <p>Framebuffer-based window system without external toolkits.</p>
+            <p>Framebuffer-based window system with compositing, built without external toolkits.</p>
+        </div>
+        <div class="card">
+            <div class="card-icon">🔧</div>
+            <h3>Hardware Control</h3>
+            <p>Direct hardware access with custom drivers for keyboard, mouse, and display.</p>
         </div>
     </div>
 </section>
 
 <section class="section fade-up">
     <h2>Architecture</h2>
+    <p class="section-intro">
+        norex follows a monolithic kernel design with clear separation between kernel and userspace.
+        The architecture emphasizes simplicity, performance, and educational value.
+    </p>
     <pre class="code">
-User Applications
-        ↓
-Syscall Interface
-        ↓
-Kernel Core
-- Scheduler
-- Memory Manager
-- IPC
-        ↓
-Hardware Abstraction
+┌─────────────────────────────┐
+│   User Applications         │
+│   (Ring 3)                  │
+└──────────────┬──────────────┘
+               │
+┌──────────────▼──────────────┐
+│   Syscall Interface         │
+│   - Process Management      │
+│   - Memory Operations       │
+│   - I/O Operations          │
+└──────────────┬──────────────┘
+               │
+┌──────────────▼──────────────┐
+│   Kernel Core (Ring 0)      │
+│   ├─ Scheduler              │
+│   ├─ Memory Manager         │
+│   ├─ IPC System             │
+│   └─ Device Drivers         │
+└──────────────┬──────────────┘
+               │
+┌──────────────▼──────────────┐
+│   Hardware Abstraction      │
+│   - CPU / Interrupts        │
+│   - Physical Memory         │
+│   - I/O Devices             │
+└─────────────────────────────┘
     </pre>
 </section>
 
@@ -86,6 +119,88 @@ Hardware Abstraction
     <h2>GUI Preview</h2>
     <img class="preview" src="assets/screenshots/placeholder.png" alt="GUI Screenshot">
     <img class="preview" src="assets/gifs/placeholder.gif" alt="GUI Animation">
+</section>
+
+<section id="getting-started" class="section fade-up">
+    <h2>Getting Started</h2>
+    <p class="section-intro">
+        Ready to explore norex? Whether you want to run it or build it from source, here's how to begin.
+    </p>
+    
+    <div class="cards">
+        <div class="card">
+            <h3>System Requirements</h3>
+            <ul class="requirements-list">
+                <li><strong>CPU:</strong> x86-64 compatible processor</li>
+                <li><strong>RAM:</strong> Minimum 512MB</li>
+                <li><strong>Boot:</strong> UEFI or BIOS support</li>
+                <li><strong>Storage:</strong> 100MB+ available space</li>
+            </ul>
+        </div>
+        <div class="card">
+            <h3>Quick Start</h3>
+            <ul class="requirements-list">
+                <li>Download the latest ISO image</li>
+                <li>Create a bootable USB or VM</li>
+                <li>Boot norex and explore</li>
+                <li>Check the docs for tutorials</li>
+            </ul>
+        </div>
+        <div class="card">
+            <h3>Build From Source</h3>
+            <ul class="requirements-list">
+                <li>Clone the repository (when public)</li>
+                <li>Install build dependencies</li>
+                <li>Run the build script</li>
+                <li>Test in QEMU or real hardware</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<section class="section dark fade-up">
+    <h2>Development Roadmap</h2>
+    <p class="section-intro">
+        norex is actively developed with a focus on fundamental OS concepts.
+    </p>
+    
+    <div class="roadmap">
+        <div class="roadmap-item completed">
+            <div class="roadmap-status">✓</div>
+            <div class="roadmap-content">
+                <h3>Phase 1: Kernel Basics</h3>
+                <p>Bootloader, memory management, basic interrupts and kernel initialization</p>
+            </div>
+        </div>
+        <div class="roadmap-item completed">
+            <div class="roadmap-status">✓</div>
+            <div class="roadmap-content">
+                <h3>Phase 2: Process Management</h3>
+                <p>Usermode support, syscalls, context switching and preemptive scheduling</p>
+            </div>
+        </div>
+        <div class="roadmap-item in-progress">
+            <div class="roadmap-status">⚙️</div>
+            <div class="roadmap-content">
+                <h3>Phase 3: GUI System</h3>
+                <p>Framebuffer driver, window management, event handling and basic compositor</p>
+            </div>
+        </div>
+        <div class="roadmap-item planned">
+            <div class="roadmap-status">○</div>
+            <div class="roadmap-content">
+                <h3>Phase 4: File System</h3>
+                <p>VFS layer, basic filesystem implementation and persistent storage</p>
+            </div>
+        </div>
+        <div class="roadmap-item planned">
+            <div class="roadmap-status">○</div>
+            <div class="roadmap-content">
+                <h3>Phase 5: Networking</h3>
+                <p>Network stack, TCP/IP implementation and driver support</p>
+            </div>
+        </div>
+    </div>
 </section>
 
 <section id="downloads" class="section fade-up">
@@ -109,7 +224,25 @@ Hardware Abstraction
 </section>
 
 <footer class="footer">
-    © norex OS — experimental system research
+    <div class="footer-content">
+        <div class="footer-section">
+            <h4>norex OS</h4>
+            <p>Experimental system research</p>
+        </div>
+        <div class="footer-section">
+            <h4>Resources</h4>
+            <a href="docs.html">Documentation</a>
+            <a href="#getting-started">Get Started</a>
+            <a href="#features">Features</a>
+        </div>
+        <div class="footer-section">
+            <h4>Connect</h4>
+            <a href="https://github.com/basti2204" target="_blank" rel="noopener">GitHub</a>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        © 2025 norex OS — Built for learning and exploration
+    </div>
 </footer>
 
 </body>
