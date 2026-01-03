@@ -1,0 +1,96 @@
+name: Sync norex docs
+
+on:
+  workflow_dispatch: # Manual trigger
+  schedule:
+    - cron: '0 * * * *' # Run hourly
+
+jobs:
+  sync-docs:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    
+    steps:
+      - name: Checkout norex.dev repository
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      
+      - name: Clone norex repository
+        run: |
+          git clone https://github.com/basti2204/norex.git /tmp/norex-source
+          cd /tmp/norex-source
+          git checkout 079902b1f042b2227494eb1d4220c8f8a229e956 || git checkout main
+      
+      - name: Sync documentation files
+        run: |
+          # Create docs directory if it doesn't exist
+          mkdir -p docs
+          
+          # Copy markdown files from norex/docs to norex.dev/docs
+          if [ -d "/tmp/norex-source/docs" ]; then
+            echo "Syncing markdown files from norex/docs..."
+            
+            # Copy all markdown files, preserving structure
+            find /tmp/norex-source/docs -name "*.md" -type f | while read -r file; do
+              # Get relative path
+              rel_path="${file#/tmp/norex-source/docs/}"
+              target_dir="docs/$(dirname "$rel_path")"
+              
+              # Create target directory if needed
+              mkdir -p "$target_dir"
+              
+              # Copy file
+              cp "$file" "docs/$rel_path"
+              echo "Copied: $rel_path"
+            done
+            
+            # Also copy any images or assets
+            find /tmp/norex-source/docs -type f \( -name "*.png" -o -name "*.jpg" -o -name "*.jpeg" -o -name "*.gif" -o -name "*.svg" \) | while read -r file; do
+              rel_path="${file#/tmp/norex-source/docs/}"
+              target_dir="docs/$(dirname "$rel_path")"
+              mkdir -p "$target_dir"
+              cp "$file" "docs/$rel_path"
+              echo "Copied asset: $rel_path"
+            done
+          else
+            echo "Warning: No docs directory found in norex repository"
+          fi
+      
+      - name: Update sync timestamp
+        run: |
+          echo "Last synced: $(date -u +"%Y-%m-%d %H:%M:%S UTC")" > docs/.sync-timestamp
+          echo "Source commit: $(cd /tmp/norex-source && git rev-parse HEAD)" >> docs/.sync-timestamp
+      
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "Sync norex docs (automated)"
+          title: "Sync norex docs (automated)"
+          body: |
+            ## Automated Documentation Sync
+            
+            This PR synchronizes documentation from the [basti2204/norex](https://github.com/basti2204/norex) repository.
+            
+            ### Changes
+            - Synced markdown files from `norex/docs/` to `norex.dev/docs/`
+            - Updated sync timestamp
+            
+            ### Source Repository
+            - **Repository:** basti2204/norex
+            - **Target Commit:** 079902b1f042b2227494eb1d4220c8f8a229e956 (or latest main)
+            - **Sync Time:** ${{ github.event.repository.updated_at }}
+            
+            This PR was automatically created by the sync-norex-docs workflow.
+            
+            /label automated docs
+          branch: docs-sync
+          branch-suffix: timestamp
+          delete-branch: true
+          labels: |
+            automated
+            docs
