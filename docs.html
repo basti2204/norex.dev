@@ -2,165 +2,36 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>norex Documentation - Developer Guide</title>
+    <title>norex Documentation - Redirecting...</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Developer documentation for norex OS - learn about kernel development, syscalls, usermode, and GUI programming.">
+    <meta http-equiv="refresh" content="0; url=./docs/">
     <link rel="stylesheet" href="./style.css">
     <link rel="stylesheet" href="./animations.css">
+    <style>
+        .redirect-message {
+            text-align: center;
+            padding: 100px 20px;
+        }
+        .redirect-message h1 {
+            color: #4a90e2;
+        }
+    </style>
 </head>
 <body>
 
-<header class="nav glass">
-    <div class="logo">norex</div>
-    <nav>
-        <a href="index.html">Home</a>
-    </nav>
-</header>
+<div class="redirect-message">
+    <h1>📚 Redirecting to Documentation...</h1>
+    <p>You're being redirected to the new norex documentation site powered by Docsify.</p>
+    <p>If you're not redirected automatically, <a href="./docs/">click here</a>.</p>
+</div>
 
-<section class="section">
-    <h2>Developer Documentation</h2>
-    <p class="section-intro">
-        Comprehensive guide to understanding and developing for norex OS.
-    </p>
-
-    <div class="doc-section">
-        <h3>🔧 Kernel Architecture</h3>
-        <p>
-            norex implements a monolithic kernel design written primarily in C and assembly.
-            The kernel runs in Ring 0 with full hardware access and privilege.
-        </p>
-        <div class="code-example">
-            <h4>Key Components:</h4>
-            <ul class="requirements-list">
-                <li><strong>Boot:</strong> GRUB2/Limine bootloader support with multiboot headers</li>
-                <li><strong>Memory:</strong> Physical and virtual memory managers with paging</li>
-                <li><strong>Scheduler:</strong> Round-robin preemptive task scheduler</li>
-                <li><strong>Interrupts:</strong> IDT setup with hardware interrupt handling</li>
-            </ul>
-        </div>
-    </div>
-
-    <div class="doc-section">
-        <h3>📞 Syscalls</h3>
-        <p>
-            Usermode interacts with the kernel via a custom syscall ABI using the INT 0x80 mechanism.
-            All syscalls are validated and executed in kernel context.
-        </p>
-        <pre class="code">
-// Example syscall interface
-#define SYS_WRITE   1
-#define SYS_READ    2
-#define SYS_EXIT    3
-#define SYS_FORK    4
-#define SYS_EXEC    5
-
-// Usage in usermode
-int write(int fd, const char* buf, size_t len) {
-    return syscall(SYS_WRITE, fd, buf, len);
-}
-        </pre>
-    </div>
-
-    <div class="doc-section">
-        <h3>👤 Usermode</h3>
-        <p>
-            Processes run isolated in Ring 3 with separate address spaces.
-            Each process has its own stack, heap, and memory protection.
-        </p>
-        <div class="code-example">
-            <h4>Process Structure:</h4>
-            <ul class="requirements-list">
-                <li><strong>PID:</strong> Unique process identifier</li>
-                <li><strong>Memory:</strong> Virtual address space (0x400000+)</li>
-                <li><strong>Context:</strong> Saved registers for context switching</li>
-                <li><strong>State:</strong> Running, ready, blocked, or terminated</li>
-            </ul>
-        </div>
-    </div>
-
-    <div class="doc-section">
-        <h3>🖥️ GUI System</h3>
-        <p>
-            The norex GUI is built directly on the framebuffer without external toolkits.
-            It provides windowing, compositing, and event handling.
-        </p>
-        <pre class="code">
-// Simple window creation
-Window* win = window_create(
-    100, 100,    // x, y position
-    640, 480,    // width, height
-    "My Window"  // title
-);
-
-// Draw to window
-draw_rect(win, 10, 10, 200, 100, COLOR_BLUE);
-draw_text(win, 20, 20, "Hello norex!", COLOR_WHITE);
-window_update(win);
-        </pre>
-    </div>
-
-    <div class="doc-section">
-        <h3>🚀 Building norex</h3>
-        <p>Building norex requires a cross-compiler and several development tools.</p>
-        <pre class="code">
-# Install dependencies (example for Ubuntu)
-sudo apt install build-essential nasm qemu-system-x86
-
-# Build the kernel
-make clean
-make all
-
-# Run in QEMU
-make run
-
-# Create bootable ISO
-make iso
-        </pre>
-    </div>
-
-    <div class="doc-section">
-        <h3>📚 Resources</h3>
-        <div class="cards">
-            <div class="card">
-                <h3>OSDev Wiki</h3>
-                <p>Comprehensive OS development resources</p>
-                <a href="https://wiki.osdev.org" target="_blank" rel="noopener" class="doc-link">Visit →</a>
-            </div>
-            <div class="card">
-                <h3>Intel Manuals</h3>
-                <p>x86-64 architecture documentation</p>
-                <a href="https://www.intel.com/content/www/us/en/developer/articles/technical/intel-sdm.html" target="_blank" rel="noopener" class="doc-link">Visit →</a>
-            </div>
-            <div class="card">
-                <h3>AMD64 ABI</h3>
-                <p>System V calling conventions</p>
-                <a href="https://refspecs.linuxbase.org/elf/x86_64-abi-0.99.pdf" target="_blank" rel="noopener" class="doc-link">Visit →</a>
-            </div>
-        </div>
-    </div>
-</section>
-
-<footer class="footer">
-    <div class="footer-content">
-        <div class="footer-section">
-            <h4>norex OS</h4>
-            <p>Experimental system research</p>
-        </div>
-        <div class="footer-section">
-            <h4>Resources</h4>
-            <a href="docs.html">Documentation</a>
-            <a href="index.html#getting-started">Get Started</a>
-            <a href="index.html#features">Features</a>
-        </div>
-        <div class="footer-section">
-            <h4>Connect</h4>
-            <a href="https://github.com/basti2204" target="_blank" rel="noopener">GitHub Profile</a>
-        </div>
-    </div>
-    <div class="footer-bottom">
-        © 2025 norex OS — Built for learning and exploration
-    </div>
-</footer>
+<script>
+    // Fallback redirect after 1 second if meta refresh doesn't work
+    setTimeout(function() {
+        window.location.href = './docs/';
+    }, 1000);
+</script>
 
 </body>
 </html>
