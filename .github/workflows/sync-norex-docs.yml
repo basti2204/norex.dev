@@ -3,10 +3,19 @@ name: Sync norex Documentation
 on:
   # Allow manual trigger
   workflow_dispatch:
+    inputs:
+      source_ref:
+        description: 'Git reference (commit, branch, or tag) to sync from'
+        required: false
+        default: '079902b1f042b2227494eb1d4220c8f8a229e956'
+        type: string
   
   # Run hourly
   schedule:
     - cron: '0 * * * *'
+
+env:
+  SOURCE_REF: '079902b1f042b2227494eb1d4220c8f8a229e956'
 
 permissions:
   contents: write
@@ -25,9 +34,11 @@ jobs:
       
       - name: Clone norex source repository
         run: |
+          REF="${{ inputs.source_ref || env.SOURCE_REF }}"
           git clone https://github.com/basti2204/norex.git /tmp/norex-source
           cd /tmp/norex-source
-          git checkout 079902b1f042b2227494eb1d4220c8f8a229e956
+          git checkout "$REF"
+          echo "SYNCED_REF=$REF" >> $GITHUB_ENV
       
       - name: Check if docs directory exists in source
         id: check_docs
@@ -80,6 +91,11 @@ jobs:
           echo "commit_date=$COMMIT_DATE" >> $GITHUB_OUTPUT
           echo "commit_msg=$COMMIT_MSG" >> $GITHUB_OUTPUT
       
+      - name: Update README with current sync info
+        run: |
+          # Update the README.md with the actual commit being synced
+          sed -i "s/ref: \`[^`]*\`/ref: \`${{ steps.source_info.outputs.commit_sha }}\`/g" docs/README.md
+      
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v6
         with:
@@ -99,7 +115,7 @@ jobs:
             
             ### Source Information
             - **Repository**: [basti2204/norex](https://github.com/basti2204/norex)
-            - **Reference**: `079902b1f042b2227494eb1d4220c8f8a229e956`
+            - **Reference**: `${{ env.SYNCED_REF }}`
             - **Commit**: ${{ steps.source_info.outputs.commit_sha }}
             - **Date**: ${{ steps.source_info.outputs.commit_date }}
             - **Last Commit**: ${{ steps.source_info.outputs.commit_msg }}
