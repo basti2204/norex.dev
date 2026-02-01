@@ -1,0 +1,73 @@
+/* ==========================================================================
+   CSS VARIABLES
+   ========================================================================== */
+
+:root {
+  /* Dark Theme (Default) */
+  --bg: #0A0A0B;
+  --bg-alt: #0E0E10;
+  --bg-card: #121214;
+  --text: #E8E8EC;
+  --text-dim: #7A7A84;
+  --text-muted: #4A4A54;
+  --text-ghost: #2A2A30;
+  --accent: #C9A87C;
+  --accent-dim: rgba(201, 168, 124, 0.15);
+  --border: #1E1E24;
+  --border-light: #2A2A32;
+  --stable: #5A8A5A;
+  --glow: rgba(201, 168, 124, 0.06);
+  --particle: 201, 168, 124;
+  --grain-opacity: 0.025;
+  
+  /* Spacing */
+  --space-xs: 8px;
+  --space-sm: 16px;
+  --space-md: 24px;
+  --space-lg: 48px;
+  --space-xl: 80px;
+  --space-2xl: 120px;
+  --space-3xl: 200px;
+  
+  /* Container */
+  --container-max: 1400px;
+  --container-padding: 48px;
+  
+  /* Transitions */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.7, 0, 0.3, 1);
+  --duration-fast: 0.15s;
+  --duration-normal: 0.3s;
+  --duration-slow: 0.6s;
+  --duration-reveal: 1s;
+  
+  /* Z-Index */
+  --z-particles: 0;
+  --z-content: 2;
+  --z-nav: 100;
+  --z-mobile-menu: 99;
+  --z-cursor: 9997;
+  --z-grain: 9998;
+  --z-wipe: 9999;
+  --z-preloader: 10000;
+  --z-skip: 10001;
+}
+
+/* Light Theme */
+[data-theme="light"] {
+  --bg: #F8F7F4;
+  --bg-alt: #FFFFFF;
+  --bg-card: #FFFFFF;
+  --text: #1A1A1E;
+  --text-dim: #5A5A64;
+  --text-muted: #8A8A94;
+  --text-ghost: #D0D0D4;
+  --accent: #8A6B3A;
+  --accent-dim: rgba(138, 107, 58, 0.12);
+  --border: #E5E4E0;
+  --border-light: #ECEAE6;
+  --stable: #4A7A4A;
+  --glow: rgba(138, 107, 58, 0.08);
+  --particle: 138, 107, 58;
+  --grain-opacity: 0.015;
+}

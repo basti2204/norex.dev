@@ -1,0 +1,6 @@
+# NOREX robots.txt
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://norex.dev/sitemap.xml

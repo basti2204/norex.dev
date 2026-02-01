@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Impressum der NOREX Website">
+  <meta name="robots" content="noindex, follow">
+  <title>Impressum — NOREX</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="apple-touch-icon" href="assets/favicon.svg">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/typography.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/responsive.css">
+
+  <style>
+    .legal-page { padding: var(--space-3xl) 0; min-height: 100vh; }
+    .legal-page__header { margin-bottom: var(--space-xl); }
+    .legal-page__content { max-width: 800px; }
+    .legal-page__content h2 { margin-top: var(--space-lg); margin-bottom: var(--space-sm); }
+    .legal-page__content p { margin-bottom: var(--space-md); color: var(--text-dim); }
+    .legal-page__back { display: inline-flex; align-items: center; gap: var(--space-xs); margin-bottom: var(--space-lg); }
+    .legal-page__back:hover { color: var(--accent); }
+  </style>
+</head>
+<body data-theme="dark">
+  <div class="grain" aria-hidden="true"></div>
+  <div id="page-wipe" class="page-wipe" aria-hidden="true"></div>
+
+  <main class="legal-page loaded">
+    <div class="container">
+      <a href="index.html" id="back-link" class="legal-page__back link-hover">
+        <span>←</span>
+        <span>Zurück zur Startseite</span>
+      </a>
+
+      <header class="legal-page__header">
+        <span class="caption accent">Legal</span>
+        <h1 class="display">Impressum<span class="accent">.</span></h1>
+      </header>
+
+      <div class="legal-page__content">
+        <h2 class="h2">Angaben gemäß § 5 TMG</h2>
+        <p class="body">
+          <strong>[Vor- und Nachname]</strong><br>
+          [Straße und Hausnummer]<br>
+          [PLZ und Ort]<br>
+          Deutschland
+        </p>
+
+        <h2 class="h2">Kontakt</h2>
+        <p class="body">
+          E-Mail: <a href="mailto:contact@norex.dev" class="link-hover accent">contact@norex.dev</a>
+        </p>
+
+        <h2 class="h2">Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV</h2>
+        <p class="body">
+          <strong>[Vor- und Nachname]</strong><br>
+          [Straße und Hausnummer]<br>
+          [PLZ und Ort]
+        </p>
+
+        <h2 class="h2">Haftung für Inhalte</h2>
+        <p class="body">
+          Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen.
+        </p>
+        <p class="body">
+          Verpflichtungen zur Entfernung oder Sperrung der Nutzung von Informationen nach den allgemeinen Gesetzen bleiben hiervon unberührt. Eine diesbezügliche Haftung ist jedoch erst ab dem Zeitpunkt der Kenntnis einer konkreten Rechtsverletzung möglich. Bei Bekanntwerden von entsprechenden Rechtsverletzungen werden wir diese Inhalte umgehend entfernen.
+        </p>
+
+        <h2 class="h2">Haftung für Links</h2>
+        <p class="body">
+          Unser Angebot enthält Links zu externen Websites Dritter, auf deren Inhalte wir keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich.
+        </p>
+
+        <h2 class="h2">Urheberrecht</h2>
+        <p class="body">
+          Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers.
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__bottom">
+        <span class="caption text-ghost">© 2026 NOREX</span>
+        <div>
+          <a href="impressum.html" class="caption text-ghost link-hover">Impressum</a>
+          <span class="caption text-ghost"> · </span>
+          <a href="datenschutz.html" class="caption text-ghost link-hover">Datenschutz</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Apply saved theme
+    const savedTheme = localStorage.getItem('norex-theme');
+    if (savedTheme) document.body.dataset.theme = savedTheme;
+
+    // Page wipe animation on back link
+    const backLink = document.getElementById('back-link');
+    const pageWipe = document.getElementById('page-wipe');
+
+    if (backLink && pageWipe) {
+      backLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        sessionStorage.setItem('norex-from-legal', 'true');
+        pageWipe.classList.add('active');
+        setTimeout(() => {
+          window.location.href = backLink.href;
+        }, 500);
+      });
+    }
+  </script>
+</body>
+</html>

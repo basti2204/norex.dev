@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="NOREX — A deterministic operating system where every behavior is intentional. Same input. Same output. Every single time.">
+  <meta name="keywords" content="NOREX, operating system, deterministic OS, kernel, UEFI, bootloader, systems programming">
+  <meta name="author" content="NOREX">
+  <meta name="theme-color" content="#0A0A0B">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://norex.dev/">
+  <meta property="og:title" content="NOREX — Deterministic OS">
+  <meta property="og:description" content="A deterministic operating system where every behavior is intentional. Same input. Same output. Every single time.">
+  <meta property="og:image" content="https://norex.dev/assets/og-image.svg">
+  <meta property="og:locale" content="en_US">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://norex.dev/">
+  <meta name="twitter:title" content="NOREX — Deterministic OS">
+  <meta name="twitter:description" content="A deterministic operating system where every behavior is intentional. Same input. Same output. Every single time.">
+  <meta name="twitter:image" content="https://norex.dev/assets/og-image.svg">
+
+  <title>NOREX — Deterministic OS</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="apple-touch-icon" href="assets/favicon.svg">
+  <link rel="manifest" href="manifest.json">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/typography.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body data-theme="dark">
+  
+  <!-- Skip Link -->
+  <a href="#main" class="skip-link">Skip to content</a>
+  
+  <!-- Preloader -->
+  <div id="preloader" class="preloader" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+    <div class="preloader__logo">
+      <span>N</span>
+    </div>
+    <div class="preloader__bar">
+      <div class="preloader__progress"></div>
+    </div>
+    <span class="preloader__text">LOADING</span>
+  </div>
+  
+  <!-- Background Effects -->
+  <div class="grain" aria-hidden="true"></div>
+  <div class="grid-overlay" aria-hidden="true"></div>
+  <canvas id="particles" aria-hidden="true"></canvas>
+  <div id="cursor" class="cursor-square" aria-hidden="true"></div>
+  <div id="glow" class="ambient-glow" aria-hidden="true"></div>
+  
+  <!-- Page Transition -->
+  <div id="page-wipe" class="page-wipe" aria-hidden="true"></div>
+  
+  <!-- Navigation -->
+  <nav id="nav" class="nav" role="navigation" aria-label="Main navigation">
+    <a href="#" class="nav__logo" data-nav="home" aria-label="NOREX Home">
+      <div class="square square--32">
+        <span>N</span>
+      </div>
+      <span class="nav__wordmark">NOREX</span>
+    </a>
+    
+    <div class="nav__links">
+      <a href="#" class="nav__link link-hover" data-nav="architecture" data-i18n="nav.architecture">Architecture</a>
+      <a href="#" class="nav__link link-hover" data-nav="components" data-i18n="nav.components">Components</a>
+      <a href="#" class="nav__link link-hover" data-nav="status" data-i18n="nav.status">Status</a>
+      <a href="#" class="nav__link link-hover" data-nav="contact" data-i18n="nav.contact">Contact</a>
+    </div>
+    
+    <div class="nav__actions">
+      <button id="lang-toggle" class="square square--36" aria-label="Toggle language">
+        <span class="lang-icon">EN</span>
+      </button>
+      <button id="sound-toggle" class="square square--36" aria-label="Toggle sound">
+        <svg class="sound-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path class="sound-on" d="M11 5L6 9H2v6h4l5 4V5z"/>
+          <path class="sound-waves" d="M15.54 8.46a5 5 0 0 1 0 7.07M19.07 4.93a10 10 0 0 1 0 14.14"/>
+          <path class="sound-off" d="M23 9l-6 6M17 9l6 6" style="display:none"/>
+        </svg>
+      </button>
+      <button id="theme-toggle" class="square square--36" aria-label="Toggle theme">
+        <svg class="theme-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <circle class="sun" cx="12" cy="12" r="5"/>
+          <g class="sun-rays">
+            <line x1="12" y1="1" x2="12" y2="3"/>
+            <line x1="12" y1="21" x2="12" y2="23"/>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+            <line x1="1" y1="12" x2="3" y2="12"/>
+            <line x1="21" y1="12" x2="23" y2="12"/>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+          </g>
+          <path class="moon" d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" style="display:none"/>
+        </svg>
+      </button>
+      <button id="menu-toggle" class="nav__burger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+  
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="mobile-menu" aria-hidden="true">
+    <a href="#" class="mobile-menu__link" data-nav="home" data-i18n="nav.home">Home</a>
+    <a href="#" class="mobile-menu__link" data-nav="architecture" data-i18n="nav.architecture">Architecture</a>
+    <a href="#" class="mobile-menu__link" data-nav="components" data-i18n="nav.components">Components</a>
+    <a href="#" class="mobile-menu__link" data-nav="status" data-i18n="nav.status">Status</a>
+    <a href="#" class="mobile-menu__link" data-nav="contact" data-i18n="nav.contact">Contact</a>
+  </div>
+  
+  <!-- Main Content -->
+  <main id="main">
+    
+    <!-- HOME PAGE -->
+    <div id="page-home" class="page page--active">
+      
+      <!-- Hero -->
+      <section class="hero">
+        <div class="hero__decoration">
+          <div class="square square--20 float-square" style="--delay: 0s"></div>
+          <div class="square square--35 float-square" style="--delay: 0.5s"></div>
+          <div class="square square--50 float-square" style="--delay: 1s"></div>
+          <div class="square square--65 float-square" style="--delay: 1.5s"></div>
+          <div class="square square--80 float-square" style="--delay: 2s"></div>
+        </div>
+        
+        <div class="hero__content">
+          <div class="reveal">
+            <div class="hero__label">
+              <div class="square square--8 square--filled"></div>
+              <span class="caption" data-i18n="hero.label">Operating System</span>
+            </div>
+          </div>
+
+          <div class="reveal" style="--delay: 100ms">
+            <h1 class="hero__title massive glitch">
+              <span data-i18n="hero.title1">PREDICT</span>
+              <span class="hero__title-indent"><span data-i18n="hero.title2">ABLE</span><span class="accent">.</span></span>
+            </h1>
+          </div>
+
+          <div class="reveal" style="--delay: 200ms">
+            <p class="hero__text body" data-i18n="hero.text">
+              An operating system where every behavior is intentional.
+              Every outcome, predictable. Built from zero.
+            </p>
+          </div>
+
+          <div class="reveal" style="--delay: 300ms">
+            <div class="hero__actions">
+              <a href="#" class="btn btn--primary" data-nav="architecture" data-i18n="hero.cta">Explore Architecture</a>
+              <span class="caption text-muted hide-mobile" data-i18n="hero.scroll">or scroll</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero__side vertical hide-tablet" data-i18n="hero.side">
+          RESEARCH GRADE — 2026
+        </div>
+        
+        <div class="hero__scroll">
+          <div class="square square--12 float-square"></div>
+          <div class="hero__scroll-line"></div>
+        </div>
+      </section>
+      
+      <!-- Manifesto -->
+      <section class="manifesto">
+        <div class="container">
+          <div class="reveal">
+            <h2 class="display">
+              <span data-i18n="manifesto.line1">Same input</span><span class="accent">.</span><br>
+              <span data-i18n="manifesto.line2">Same output</span><span class="accent">.</span><br>
+              <span class="text-muted" data-i18n="manifesto.line3">Every single time.</span>
+            </h2>
+          </div>
+        </div>
+        <div class="manifesto__number">01</div>
+      </section>
+      
+      <!-- Numbers -->
+      <section class="numbers">
+        <div class="container">
+          <div class="numbers__grid">
+            <div class="reveal reveal--left">
+              <div class="number-item">
+                <div class="number-item__value">
+                  <span data-i18n="numbers.val.loc">270K</span>
+                  <div class="square square--8 square--filled"></div>
+                </div>
+                <p class="h3 text-dim" data-i18n="numbers.loc">Lines of code</p>
+                <p class="small text-muted" data-i18n="numbers.loc.sub">From scratch.</p>
+              </div>
+            </div>
+            <div class="reveal reveal--right" style="--delay: 100ms">
+              <div class="number-item number-item--offset">
+                <div class="number-item__value">
+                  <span data-i18n="numbers.val.deps">0</span>
+                  <div class="square square--8 square--filled"></div>
+                </div>
+                <p class="h3 text-dim" data-i18n="numbers.deps">Dependencies</p>
+                <p class="small text-muted" data-i18n="numbers.deps.sub">Self-contained.</p>
+              </div>
+            </div>
+            <div class="reveal reveal--left" style="--delay: 200ms">
+              <div class="number-item">
+                <div class="number-item__value">
+                  <span data-i18n="numbers.val.acpi">136</span>
+                  <div class="square square--8 square--filled"></div>
+                </div>
+                <p class="h3 text-dim" data-i18n="numbers.acpi">ACPI files</p>
+                <p class="small text-muted" data-i18n="numbers.acpi.sub">Full 6.5 spec.</p>
+              </div>
+            </div>
+            <div class="reveal reveal--right" style="--delay: 300ms">
+              <div class="number-item number-item--offset">
+                <div class="number-item__value">
+                  <span data-i18n="numbers.val.repro">∞</span>
+                  <div class="square square--8 square--filled"></div>
+                </div>
+                <p class="h3 text-dim" data-i18n="numbers.repro">Reproducibility</p>
+                <p class="small text-muted" data-i18n="numbers.repro.sub">Deterministic.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Marquee -->
+      <section class="marquee">
+        <div class="marquee__track">
+          <div class="marquee__content">
+            <span class="h2 text-muted" data-i18n="marquee.1">DETERMINISM</span>
+            <div class="square square--12"></div>
+            <span class="h2 text-muted" data-i18n="marquee.2">SEPARATION</span>
+            <div class="square square--12"></div>
+            <span class="h2 text-muted" data-i18n="marquee.3">BOUNDED EXECUTION</span>
+            <div class="square square--12"></div>
+            <span class="h2 text-muted" data-i18n="marquee.4">ZERO STUBS</span>
+            <div class="square square--12"></div>
+            <span class="h2 text-muted" data-i18n="marquee.5">CLEAN ROOM</span>
+            <div class="square square--12"></div>
+          </div>
+          <div class="marquee__content" aria-hidden="true">
+            <span class="h2 text-muted" data-i18n="marquee.1">DETERMINISM</span>
+            <div class="square square--12"></div>
+            <span class="h2 text-muted" data-i18n="marquee.2">SEPARATION</span>
+            <div class="square square--12"></div>
+            <span class="h2 text-muted" data-i18n="marquee.3">BOUNDED EXECUTION</span>
+            <div class="square square--12"></div>
+            <span class="h2 text-muted" data-i18n="marquee.4">ZERO STUBS</span>
+            <div class="square square--12"></div>
+            <span class="h2 text-muted" data-i18n="marquee.5">CLEAN ROOM</span>
+            <div class="square square--12"></div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Terminal -->
+      <section class="terminal-section">
+        <div class="container">
+          <div class="terminal-section__header">
+            <div class="reveal">
+              <span class="caption accent" data-i18n="terminal.label">Interactive</span>
+              <h2 class="h1"><span data-i18n="terminal.title">Try the system</span><span class="accent">.</span></h2>
+            </div>
+            <p class="body text-dim hide-tablet reveal" style="--delay: 100ms" data-i18n="terminal.hint">
+              Type "help" or "demo" for boot sequence.
+            </p>
+          </div>
+          
+          <div class="reveal" style="--delay: 200ms">
+            <div id="terminal" class="terminal">
+              <div class="terminal__header">
+                <div class="terminal__dots">
+                  <span class="terminal__dot terminal__dot--red"></span>
+                  <span class="terminal__dot terminal__dot--yellow"></span>
+                  <span class="terminal__dot terminal__dot--green"></span>
+                </div>
+                <span class="terminal__title">norex-terminal</span>
+              </div>
+              <div id="terminal-output" class="terminal__body">
+                <div class="terminal__line terminal__line--system">NOREX 0.1.0 — Research Build</div>
+                <div class="terminal__line terminal__line--system">Type "help" or "demo"</div>
+              </div>
+              <form id="terminal-form" class="terminal__input-line">
+                <span class="terminal__prompt">$</span>
+                <input type="text" id="terminal-input" class="terminal__input" autocomplete="off" spellcheck="false" aria-label="Terminal command">
+                <span class="terminal__cursor"></span>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="terminal-section__number">02</div>
+      </section>
+      
+      <!-- Architecture Teaser -->
+      <section class="arch-teaser">
+        <div class="arch-teaser__text">
+          <div class="reveal reveal--left">
+            <span class="caption accent" data-i18n="arch.label">Architecture</span>
+            <h2 class="h1">
+              <span data-i18n="arch.title1">Facts</span><span class="accent">,</span><br>
+              <span data-i18n="arch.title2">not opinions</span><span class="accent">.</span>
+            </h2>
+            <p class="body text-dim" data-i18n="arch.text">
+              The kernel measures. "CPU: 80%" is a fact. "That's too high" is policy.
+            </p>
+            <a href="#" class="btn btn--primary" data-nav="architecture" data-i18n="arch.cta">View Architecture</a>
+          </div>
+        </div>
+        <div class="arch-teaser__code">
+          <div class="arch-teaser__grid"></div>
+          <div class="reveal reveal--right">
+            <pre class="mono"><code>struct kernel_fact {
+    u64   cpu_load;    <span class="text-muted">// measurement</span>
+    char* mem_state;   <span class="text-muted">// "nominal"</span>
+    char* event;       <span class="text-muted">// "usb:attached"</span>
+};</code></pre>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Components Preview -->
+      <section class="components-preview">
+        <div class="container">
+          <div class="components-preview__header">
+            <div class="reveal">
+              <span class="caption accent" data-i18n="comp.label">Components</span>
+              <h2 class="h1"><span data-i18n="comp.title">What exists</span><span class="accent">.</span></h2>
+            </div>
+            <a href="#" class="btn btn--ghost reveal" data-nav="components" style="--delay: 100ms" data-i18n="comp.viewall">View All →</a>
+          </div>
+          
+          <div class="components-grid">
+            <div class="reveal" style="--delay: 0ms">
+              <article class="card">
+                <div class="card__header">
+                  <span class="caption text-muted" data-i18n="comp.bootloader">Bootloader</span>
+                  <span class="mono accent">~4K</span>
+                </div>
+                <h3 class="h3" data-i18n="comp.title.astryx">ASTRYX</h3>
+                <p class="small text-dim" data-i18n="comp.astryx">UEFI boot. 11 phases.</p>
+                <div class="card__status">
+                  <span class="status-dot status-dot--stable"></span>
+                  <span class="caption status-text--stable" data-i18n="comp.stable">Stable</span>
+                </div>
+              </article>
+            </div>
+            <div class="reveal" style="--delay: 80ms">
+              <article class="card card--offset">
+                <div class="card__header">
+                  <span class="caption text-muted" data-i18n="comp.hardware">Hardware</span>
+                  <span class="mono accent">~15K</span>
+                </div>
+                <h3 class="h3" data-i18n="comp.title.acpi">ACPI</h3>
+                <p class="small text-dim" data-i18n="comp.acpi">Full 6.5 spec. AML.</p>
+                <div class="card__status">
+                  <span class="status-dot status-dot--stable"></span>
+                  <span class="caption status-text--stable" data-i18n="comp.stable">Stable</span>
+                </div>
+              </article>
+            </div>
+            <div class="reveal" style="--delay: 160ms">
+              <article class="card">
+                <div class="card__header">
+                  <span class="caption text-muted" data-i18n="comp.kernel">Kernel</span>
+                  <span class="mono accent">~8K</span>
+                </div>
+                <h3 class="h3" data-i18n="comp.title.memory">Memory</h3>
+                <p class="small text-dim" data-i18n="comp.memory">Buddy allocator. COW.</p>
+                <div class="card__status">
+                  <span class="status-dot status-dot--stable"></span>
+                  <span class="caption status-text--stable" data-i18n="comp.stable">Stable</span>
+                </div>
+              </article>
+            </div>
+            <div class="reveal" style="--delay: 240ms">
+              <article class="card card--offset">
+                <div class="card__header">
+                  <span class="caption text-muted" data-i18n="comp.stack">Stack</span>
+                  <span class="mono accent">~8K</span>
+                </div>
+                <h3 class="h3" data-i18n="comp.title.network">Network</h3>
+                <p class="small text-dim" data-i18n="comp.network">IPv4/6. TCP/UDP.</p>
+                <div class="card__status">
+                  <span class="status-dot status-dot--stable"></span>
+                  <span class="caption status-text--stable" data-i18n="comp.stable">Stable</span>
+                </div>
+              </article>
+            </div>
+            <div class="reveal" style="--delay: 320ms">
+              <article class="card">
+                <div class="card__header">
+                  <span class="caption text-muted" data-i18n="comp.drivers">Drivers</span>
+                  <span class="mono accent">~3.5K</span>
+                </div>
+                <h3 class="h3" data-i18n="comp.title.usb">USB</h3>
+                <p class="small text-dim" data-i18n="comp.usb">xHCI. HID. Storage.</p>
+                <div class="card__status">
+                  <span class="status-dot status-dot--stable"></span>
+                  <span class="caption status-text--stable" data-i18n="comp.stable">Stable</span>
+                </div>
+              </article>
+            </div>
+            <div class="reveal" style="--delay: 400ms">
+              <article class="card card--offset">
+                <div class="card__header">
+                  <span class="caption text-muted" data-i18n="comp.gui">GUI</span>
+                  <span class="mono accent">~12K</span>
+                </div>
+                <h3 class="h3" data-i18n="comp.title.compositor">Compositor</h3>
+                <p class="small text-dim" data-i18n="comp.compositor">Window server.</p>
+                <div class="card__status">
+                  <span class="status-dot status-dot--stable"></span>
+                  <span class="caption status-text--stable" data-i18n="comp.stable">Stable</span>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+        <div class="components-preview__number">03</div>
+      </section>
+
+      <!-- CTA -->
+      <section class="cta">
+        <div class="container">
+          <div class="reveal">
+            <h2 class="display"><span data-i18n="cta.title">Research grade</span><span class="accent">.</span></h2>
+            <p class="body text-dim" data-i18n="cta.text">Functional on real hardware. Active research.</p>
+            <div class="cta__actions">
+              <a href="#" class="btn btn--primary" data-nav="status" data-i18n="cta.status">View Status</a>
+              <a href="#" class="btn btn--ghost" data-nav="architecture" data-i18n="cta.docs">Read Docs</a>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+    </div>
+    
+    <!-- ARCHITECTURE PAGE -->
+    <div id="page-architecture" class="page">
+      <section class="page-header">
+        <div class="container">
+          <div class="reveal">
+            <span class="caption accent" data-i18n="nav.architecture">Architecture</span>
+            <h1 class="display"><span data-i18n="archpage.title1">System</span><br><span data-i18n="archpage.title2">structure</span><span class="accent">.</span></h1>
+          </div>
+        </div>
+      </section>
+
+      <section class="layers">
+        <div class="container">
+          <div class="reveal">
+            <div class="layer">
+              <div class="layer__label">
+                <div class="square square--10 square--filled" style="color: #5A8A5A"></div>
+                <span class="caption" style="color: #5A8A5A" data-i18n="layer.userland">USERLAND</span>
+              </div>
+              <div class="layer__content">
+                <p class="small text-dim" data-i18n="layer.userland.desc">Policy daemons.</p>
+                <div class="layer__tags">
+                  <span class="tag">powerd</span>
+                  <span class="tag">secd</span>
+                  <span class="tag">hotplugd</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="reveal" style="--delay: 100ms">
+            <div class="layer">
+              <div class="layer__label">
+                <div class="square square--10 square--filled accent-bg"></div>
+                <span class="caption accent" data-i18n="layer.kernel">KERNEL</span>
+              </div>
+              <div class="layer__content">
+                <p class="small text-dim" data-i18n="layer.kernel.desc">Core services.</p>
+                <div class="layer__tags">
+                  <span class="tag">Scheduler</span>
+                  <span class="tag">VFS</span>
+                  <span class="tag">Network</span>
+                  <span class="tag">Memory</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="reveal" style="--delay: 200ms">
+            <div class="layer">
+              <div class="layer__label">
+                <div class="square square--10 square--filled" style="color: #A8865A"></div>
+                <span class="caption" style="color: #A8865A" data-i18n="layer.astryx">ASTRYX</span>
+              </div>
+              <div class="layer__content">
+                <p class="small text-dim" data-i18n="layer.astryx.desc">UEFI bootloader.</p>
+                <div class="layer__tags">
+                  <span class="tag">ELF Loader</span>
+                  <span class="tag">GOP Init</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="reveal" style="--delay: 300ms">
+            <div class="layer">
+              <div class="layer__label">
+                <div class="square square--10 square--filled text-muted-bg"></div>
+                <span class="caption text-muted" data-i18n="layer.hardware">HARDWARE</span>
+              </div>
+              <div class="layer__content">
+                <p class="small text-dim" data-i18n="layer.hardware.desc">Physical layer.</p>
+                <div class="layer__tags">
+                  <span class="tag">x86_64</span>
+                  <span class="tag">UEFI</span>
+                  <span class="tag">PCI</span>
+                  <span class="tag">USB</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    
+    <!-- COMPONENTS PAGE -->
+    <div id="page-components" class="page">
+      <section class="page-header">
+        <div class="container">
+          <div class="reveal">
+            <span class="caption accent" data-i18n="nav.components">Components</span>
+            <h1 class="display"><span data-i18n="comppage.title">Inventory</span><span class="accent">.</span></h1>
+          </div>
+        </div>
+      </section>
+
+      <section class="inventory">
+        <div class="container">
+          <div class="inventory__category">
+            <h2 class="caption text-muted reveal" data-i18n="comppage.core">Core</h2>
+            <div class="inventory__items">
+              <div class="reveal" style="--delay: 50ms">
+                <div class="inventory__row">
+                  <h3 class="h3">ASTRYX</h3>
+                  <p class="small text-dim" data-i18n="inv.astryx.desc">UEFI bootloader.</p>
+                  <div class="inventory__meta">
+                    <span class="mono accent">~4K</span>
+                    <div class="inventory__status">
+                      <span class="status-dot status-dot--stable"></span>
+                      <span class="caption status-text--stable" data-i18n="inv.stable">STABLE</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="reveal" style="--delay: 100ms">
+                <div class="inventory__row">
+                  <h3 class="h3">Memory</h3>
+                  <p class="small text-dim" data-i18n="inv.memory.desc">Buddy allocator.</p>
+                  <div class="inventory__meta">
+                    <span class="mono accent">~8K</span>
+                    <div class="inventory__status">
+                      <span class="status-dot status-dot--stable"></span>
+                      <span class="caption status-text--stable" data-i18n="inv.stable">STABLE</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="inventory__category">
+            <h2 class="caption text-muted reveal" data-i18n="comppage.hardware">Hardware</h2>
+            <div class="inventory__items">
+              <div class="reveal" style="--delay: 50ms">
+                <div class="inventory__row">
+                  <h3 class="h3">ACPI</h3>
+                  <p class="small text-dim" data-i18n="inv.acpi.desc">Full 6.5 spec.</p>
+                  <div class="inventory__meta">
+                    <span class="mono accent">~15K</span>
+                    <div class="inventory__status">
+                      <span class="status-dot status-dot--stable"></span>
+                      <span class="caption status-text--stable" data-i18n="inv.stable">STABLE</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="reveal" style="--delay: 100ms">
+                <div class="inventory__row">
+                  <h3 class="h3">USB</h3>
+                  <p class="small text-dim" data-i18n="inv.usb.desc">xHCI controller.</p>
+                  <div class="inventory__meta">
+                    <span class="mono accent">~3.5K</span>
+                    <div class="inventory__status">
+                      <span class="status-dot status-dot--stable"></span>
+                      <span class="caption status-text--stable" data-i18n="inv.stable">STABLE</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="inventory__category">
+            <h2 class="caption text-muted reveal" data-i18n="comppage.network">Network</h2>
+            <div class="inventory__items">
+              <div class="reveal" style="--delay: 50ms">
+                <div class="inventory__row">
+                  <h3 class="h3">IP Stack</h3>
+                  <p class="small text-dim" data-i18n="inv.ip.desc">IPv4/IPv6.</p>
+                  <div class="inventory__meta">
+                    <span class="mono accent">~8K</span>
+                    <div class="inventory__status">
+                      <span class="status-dot status-dot--stable"></span>
+                      <span class="caption status-text--stable" data-i18n="inv.stable">STABLE</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="inventory__category">
+            <h2 class="caption text-muted reveal" data-i18n="comppage.interface">Interface</h2>
+            <div class="inventory__items">
+              <div class="reveal" style="--delay: 50ms">
+                <div class="inventory__row">
+                  <h3 class="h3">Compositor</h3>
+                  <p class="small text-dim" data-i18n="inv.compositor.desc">Window server.</p>
+                  <div class="inventory__meta">
+                    <span class="mono accent">~12K</span>
+                    <div class="inventory__status">
+                      <span class="status-dot status-dot--stable"></span>
+                      <span class="caption status-text--stable" data-i18n="inv.stable">STABLE</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    
+    <!-- STATUS PAGE -->
+    <div id="page-status" class="page">
+      <section class="page-header">
+        <div class="container">
+          <div class="reveal">
+            <span class="caption accent" data-i18n="nav.status">Status</span>
+            <h1 class="display"><span data-i18n="statuspage.title1">Current</span><br><span data-i18n="statuspage.title2">state</span><span class="accent">.</span></h1>
+          </div>
+        </div>
+      </section>
+
+      <section class="status-hero">
+        <div class="container">
+          <div class="reveal">
+            <div class="status-card">
+              <div class="status-card__accent"></div>
+              <span class="caption accent" data-i18n="status.phase">Phase</span>
+              <h2 class="massive massive--sm" data-i18n="status.research">RESEARCH</h2>
+              <p class="body text-dim" data-i18n="status.desc">Functional on real hardware.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="operational">
+        <div class="container">
+          <h2 class="h2 reveal"><span data-i18n="status.operational">Operational</span><span class="accent">.</span></h2>
+          <div class="operational__grid">
+            <div class="reveal" style="--delay: 0ms"><div class="operational__item"><span class="status-dot status-dot--stable"></span><span class="small" data-i18n="op.uefi">UEFI boot</span></div></div>
+            <div class="reveal" style="--delay: 40ms"><div class="operational__item"><span class="status-dot status-dot--stable"></span><span class="small" data-i18n="op.gui">GUI</span></div></div>
+            <div class="reveal" style="--delay: 80ms"><div class="operational__item"><span class="status-dot status-dot--stable"></span><span class="small" data-i18n="op.files">Files</span></div></div>
+            <div class="reveal" style="--delay: 120ms"><div class="operational__item"><span class="status-dot status-dot--stable"></span><span class="small" data-i18n="op.terminal">Terminal</span></div></div>
+            <div class="reveal" style="--delay: 160ms"><div class="operational__item"><span class="status-dot status-dot--stable"></span><span class="small" data-i18n="op.usb">USB</span></div></div>
+            <div class="reveal" style="--delay: 200ms"><div class="operational__item"><span class="status-dot status-dot--stable"></span><span class="small" data-i18n="op.network">Network</span></div></div>
+            <div class="reveal" style="--delay: 240ms"><div class="operational__item"><span class="status-dot status-dot--stable"></span><span class="small" data-i18n="op.nvme">NVMe</span></div></div>
+            <div class="reveal" style="--delay: 280ms"><div class="operational__item"><span class="status-dot status-dot--stable"></span><span class="small" data-i18n="op.multitask">Multitask</span></div></div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- CONTACT PAGE -->
+    <div id="page-contact" class="page">
+      <section class="page-header">
+        <div class="container">
+          <div class="reveal">
+            <span class="caption accent" data-i18n="nav.contact">Contact</span>
+            <h1 class="display"><span data-i18n="contactpage.title1">Get in</span><br><span data-i18n="contactpage.title2">touch</span><span class="accent">.</span></h1>
+          </div>
+        </div>
+      </section>
+
+      <section class="contact-section">
+        <div class="container">
+          <div class="contact-grid">
+            <div class="contact-info reveal">
+              <p class="body text-dim" data-i18n="contact.intro">
+                Have questions about NOREX? Want to contribute or collaborate?
+                Send us a message.
+              </p>
+              <div class="contact-details">
+                <div class="contact-item">
+                  <span class="caption text-muted" data-i18n="contact.email">Email</span>
+                  <a href="mailto:contact@norex.dev" class="h3 link-hover">contact@norex.dev</a>
+                </div>
+                <div class="contact-item">
+                  <span class="caption text-muted" data-i18n="contact.response">Response Time</span>
+                  <span class="small text-dim" data-i18n="contact.response.value">Usually within 48 hours</span>
+                </div>
+              </div>
+            </div>
+
+            <form id="contact-form" class="contact-form reveal" style="--delay: 100ms">
+              <div class="form-group">
+                <label for="contact-name" class="caption text-muted" data-i18n="contact.name">Name</label>
+                <input type="text" id="contact-name" name="name" required class="form-input" data-i18n-placeholder="contact.name.placeholder" placeholder="Your name">
+              </div>
+              <div class="form-group">
+                <label for="contact-email" class="caption text-muted" data-i18n="contact.email">Email</label>
+                <input type="email" id="contact-email" name="email" required class="form-input" data-i18n-placeholder="contact.email.placeholder" placeholder="your@email.com">
+              </div>
+              <div class="form-group">
+                <label for="contact-subject" class="caption text-muted" data-i18n="contact.subject">Subject</label>
+                <select id="contact-subject" name="subject" required class="form-input">
+                  <option value="" data-i18n="contact.subject.select">Select a topic</option>
+                  <option value="general" data-i18n="contact.subject.general">General Inquiry</option>
+                  <option value="technical" data-i18n="contact.subject.technical">Technical Question</option>
+                  <option value="collaboration" data-i18n="contact.subject.collaboration">Collaboration</option>
+                  <option value="feedback" data-i18n="contact.subject.feedback">Feedback</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="contact-message" class="caption text-muted" data-i18n="contact.message">Message</label>
+                <textarea id="contact-message" name="message" required class="form-input form-textarea" rows="5" data-i18n-placeholder="contact.message.placeholder" placeholder="Your message..."></textarea>
+              </div>
+              <button type="submit" class="btn btn--primary" data-i18n="contact.submit">Send Message</button>
+              <p id="contact-status" class="small text-dim contact-status"></p>
+            </form>
+          </div>
+        </div>
+      </section>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <div class="footer__logo">
+            <div class="square square--24">
+              <span>N</span>
+            </div>
+            <span class="caption text-muted">NOREX</span>
+          </div>
+          <p class="small text-muted" data-i18n="footer.tagline">A deterministic OS. Research grade.</p>
+        </div>
+        <div class="footer__nav">
+          <span class="caption text-muted" data-i18n="footer.navigate">Navigate</span>
+          <a href="#" class="link-hover" data-nav="home" data-i18n="nav.home">Home</a>
+          <a href="#" class="link-hover" data-nav="architecture" data-i18n="nav.architecture">Architecture</a>
+          <a href="#" class="link-hover" data-nav="components" data-i18n="nav.components">Components</a>
+          <a href="#" class="link-hover" data-nav="status" data-i18n="nav.status">Status</a>
+          <a href="#" class="link-hover" data-nav="contact" data-i18n="nav.contact">Contact</a>
+        </div>
+        <div class="footer__legal">
+          <span class="caption text-muted" data-i18n="footer.legal">Legal</span>
+          <a href="impressum.html" id="footer-imprint" class="link-hover" data-i18n="footer.imprint">Imprint</a>
+          <a href="datenschutz.html" id="footer-privacy" class="link-hover" data-i18n="footer.privacy">Privacy Policy</a>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <span class="caption text-ghost">© 2026 NOREX</span>
+        <span class="caption text-ghost">Research Grade</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Cookie Banner -->
+  <div id="cookie-banner" class="cookie-banner" role="dialog" aria-labelledby="cookie-title" aria-hidden="true">
+    <div class="cookie-banner__content">
+      <div class="cookie-banner__text">
+        <h3 id="cookie-title" class="small" data-i18n="cookie.title">Cookie Settings</h3>
+        <p class="caption text-dim">
+          <span data-i18n="cookie.text">This website uses localStorage for theme and sound settings. No tracking cookies.</span>
+          <a href="privacy.html" id="cookie-privacy-link" class="link-hover accent" data-i18n="cookie.learn">Learn more</a>
+        </p>
+      </div>
+      <div class="cookie-banner__actions">
+        <button id="cookie-accept" class="btn btn--primary" data-i18n="cookie.accept">Accept</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/utils.js"></script>
+  <script src="js/sound.js"></script>
+  <script src="js/particles.js"></script>
+  <script src="js/terminal.js"></script>
+  <script src="js/i18n.js"></script>
+  <script src="js/navigation.js"></script>
+  <script src="js/animations.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

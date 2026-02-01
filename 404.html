@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Page not found — NOREX">
+  <meta name="robots" content="noindex, follow">
+  <title>404 — NOREX</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="apple-touch-icon" href="assets/favicon.svg">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/typography.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/responsive.css">
+
+  <style>
+    .error-page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: var(--space-lg);
+    }
+    .error-page__code {
+      font-size: clamp(100px, 20vw, 200px);
+      font-weight: 700;
+      line-height: 1;
+      color: var(--accent);
+      opacity: 0.3;
+      margin-bottom: var(--space-md);
+    }
+    .error-page__title {
+      margin-bottom: var(--space-sm);
+    }
+    .error-page__text {
+      margin-bottom: var(--space-xl);
+      max-width: 400px;
+    }
+    .error-page__terminal {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: var(--space-md) var(--space-lg);
+      margin-bottom: var(--space-xl);
+      text-align: left;
+    }
+    .error-page__terminal span {
+      color: var(--accent);
+    }
+    .error-page__actions {
+      display: flex;
+      gap: var(--space-md);
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+  </style>
+</head>
+<body data-theme="dark">
+  <div class="grain" aria-hidden="true"></div>
+
+  <main class="error-page">
+    <div class="error-page__code">404</div>
+
+    <h1 class="h1 error-page__title">Page not found<span class="accent">.</span></h1>
+
+    <p class="body text-dim error-page__text">
+      The page you're looking for doesn't exist or has been moved.
+    </p>
+
+    <div class="error-page__terminal">
+      <span>$</span> cd /requested/path<br>
+      <span class="text-dim">bash: cd: /requested/path: No such file or directory</span>
+    </div>
+
+    <div class="error-page__actions">
+      <a href="index.html" class="btn btn--primary">Back to Home</a>
+      <a href="index.html#status" class="btn btn--ghost">View Status →</a>
+    </div>
+  </main>
+
+  <script>
+    // Apply saved theme
+    const savedTheme = localStorage.getItem('norex-theme');
+    if (savedTheme) {
+      document.body.dataset.theme = savedTheme;
+    }
+  </script>
+</body>
+</html>

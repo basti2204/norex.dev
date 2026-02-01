@@ -1,0 +1,385 @@
+NOREX WEBSITE - COMPLETE ENGLISH CONTENT
+=========================================
+
+=== META / SEO ===
+Title: NOREX — Deterministic OS
+Description: NOREX — A deterministic operating system where every behavior is intentional. Same input. Same output. Every single time.
+Keywords: NOREX, operating system, deterministic OS, kernel, UEFI, bootloader, systems programming
+Author: NOREX
+
+=== PRELOADER ===
+N
+LOADING
+READY
+
+=== SKIP LINK ===
+Skip to content
+
+=== NAVIGATION ===
+N
+NOREX
+Architecture
+Components
+Status
+Contact
+Home
+
+=== HERO SECTION ===
+Label: Operating System
+Title Line 1: PREDICT
+Title Line 2: ABLE
+Punctuation: .
+Text: An operating system where every behavior is intentional. Every outcome, predictable. Built from zero.
+CTA Button: Explore Architecture
+Scroll hint: or scroll
+Side text: RESEARCH GRADE — 2026
+
+=== MANIFESTO SECTION ===
+Line 1: Same input
+Line 2: Same output
+Line 3: Every single time.
+Punctuation: .
+Background number: 01
+
+=== NUMBERS SECTION ===
+Item 1:
+  Value: 270K
+  Label: Lines of code
+  Sublabel: From scratch.
+
+Item 2:
+  Value: 0
+  Label: Dependencies
+  Sublabel: Self-contained.
+
+Item 3:
+  Value: 136
+  Label: ACPI files
+  Sublabel: Full 6.5 spec.
+
+Item 4:
+  Value: ∞
+  Label: Reproducibility
+  Sublabel: Deterministic.
+
+=== MARQUEE SECTION ===
+DETERMINISM
+SEPARATION
+BOUNDED EXECUTION
+ZERO STUBS
+CLEAN ROOM
+
+=== TERMINAL SECTION ===
+Label: Interactive
+Title: Try the system
+Punctuation: .
+Hint: Type "help" or "demo" for boot sequence.
+Background number: 02
+
+Terminal Window:
+  Title bar: norex-terminal
+  Initial output line 1: NOREX 0.1.0 — Research Build
+  Initial output line 2: Type "help" or "demo"
+  Prompt: $
+
+=== ARCHITECTURE TEASER SECTION ===
+Label: Architecture
+Title Line 1: Facts
+Title Line 2: not opinions
+Punctuation: , .
+Text: The kernel reports what it sees. Userland decides what to do. Clean separation.
+CTA Button: View Architecture
+
+Code snippet:
+  struct kernel_fact {
+      u64   cpu_load;    // measurement
+      char* mem_state;   // "nominal"
+      char* event;       // "usb:attached"
+  };
+
+=== COMPONENTS PREVIEW SECTION ===
+Label: Components
+Title: What exists
+Punctuation: .
+View All Link: View All →
+Background number: 03
+
+Component Cards:
+
+Card 1:
+  Category: Bootloader
+  Size: ~4K
+  Name: ASTRYX
+  Description: UEFI boot. 11 phases.
+  Status: Stable
+
+Card 2:
+  Category: Hardware
+  Size: ~15K
+  Name: ACPI
+  Description: Full 6.5 spec. AML.
+  Status: Stable
+
+Card 3:
+  Category: Kernel
+  Size: ~8K
+  Name: Memory
+  Description: Buddy allocator. COW.
+  Status: Stable
+
+Card 4:
+  Category: Stack
+  Size: ~8K
+  Name: Network
+  Description: IPv4/6. TCP/UDP.
+  Status: Stable
+
+Card 5:
+  Category: Drivers
+  Size: ~3.5K
+  Name: USB
+  Description: xHCI. HID. Storage.
+  Status: Stable
+
+Card 6:
+  Category: GUI
+  Size: ~12K
+  Name: Compositor
+  Description: Window server.
+  Status: Stable
+
+=== CTA SECTION ===
+Title: Research grade
+Punctuation: .
+Text: Functional on real hardware. Active research.
+Button 1: View Status
+Button 2: Read Docs
+
+=== ARCHITECTURE PAGE ===
+Label: Architecture
+Title Line 1: System
+Title Line 2: structure
+Punctuation: .
+
+Layer 1 - USERLAND:
+  Color indicator: Green
+  Description: Policy daemons.
+  Tags: powerd, secd, hotplugd
+
+Layer 2 - KERNEL:
+  Color indicator: Gold/Accent
+  Description: System core.
+  Tags: Scheduler, VFS, Network, Memory
+
+Layer 3 - ASTRYX:
+  Color indicator: Orange/Brown
+  Description: UEFI bootloader.
+  Tags: ELF Loader, GOP Init
+
+Layer 4 - HARDWARE:
+  Color indicator: Gray
+  Description: Bare metal.
+  Tags: x86_64, UEFI, PCI, USB
+
+=== COMPONENTS PAGE ===
+Label: Components
+Title: Inventory
+Punctuation: .
+
+Category: Core
+  Item 1:
+    Name: ASTRYX
+    Description: UEFI bootloader.
+    Size: ~4K
+    Status: STABLE
+  Item 2:
+    Name: Memory
+    Description: Buddy allocator.
+    Size: ~8K
+    Status: STABLE
+
+Category: Hardware
+  Item 1:
+    Name: ACPI
+    Description: Full 6.5 spec.
+    Size: ~15K
+    Status: STABLE
+  Item 2:
+    Name: USB
+    Description: xHCI controller.
+    Size: ~3.5K
+    Status: STABLE
+
+Category: Network
+  Item 1:
+    Name: IP Stack
+    Description: IPv4/IPv6.
+    Size: ~8K
+    Status: STABLE
+
+Category: Interface
+  Item 1:
+    Name: Compositor
+    Description: Window server.
+    Size: ~12K
+    Status: STABLE
+
+=== STATUS PAGE ===
+Label: Status
+Title Line 1: Current
+Title Line 2: state
+Punctuation: .
+
+Status Card:
+  Label: Phase
+  Value: RESEARCH
+  Description: Functional on real hardware.
+
+Operational Section:
+  Title: Operational
+  Punctuation: .
+  Items:
+    - UEFI boot
+    - GUI
+    - Files
+    - Terminal
+    - USB
+    - Network
+    - NVMe
+    - Multitask
+
+=== CONTACT PAGE ===
+Label: Contact
+Title Line 1: Get in
+Title Line 2: touch
+Punctuation: .
+
+Intro text: Have questions about NOREX? Want to contribute or collaborate? Send us a message.
+
+Contact Info:
+  Email Label: Email
+  Email Value: contact@norex.dev
+  Response Label: Response Time
+  Response Value: Usually within 48 hours
+
+Form Fields:
+  Field 1:
+    Label: Name
+    Placeholder: Your name
+  Field 2:
+    Label: Email
+    Placeholder: your@email.com
+  Field 3:
+    Label: Subject
+    Placeholder: Select a topic
+    Options:
+      - General Inquiry
+      - Technical Question
+      - Collaboration
+      - Feedback
+  Field 4:
+    Label: Message
+    Placeholder: Your message...
+  Submit Button: Send Message
+
+Form Status Messages:
+  Validation error: Please fill in all fields.
+  Email error: Please enter a valid email address.
+  Sending: Sending...
+  Success: Message prepared! Click below to send via email.
+  Success link: Open in email client →
+
+=== FOOTER ===
+Logo: N
+Brand name: NOREX
+Tagline: A predictable OS. Research grade.
+
+Navigate Section:
+  Title: Navigate
+  Links:
+    - Home
+    - Architecture
+    - Components
+    - Status
+    - Contact
+
+Legal Section:
+  Title: Legal
+  Links:
+    - Imprint
+    - Privacy Policy
+
+Bottom Bar:
+  Copyright: © 2026 NOREX
+  Label: Research Grade
+
+=== COOKIE BANNER ===
+Title: Cookie Settings
+Text: This website uses localStorage for theme and sound settings. No tracking cookies.
+Link: Learn more
+Button: Accept
+
+=== LEGAL PAGES ===
+
+Imprint Page:
+  Back link: ← Back to home
+  Label: Legal
+  Title: Imprint.
+
+Privacy Page:
+  Back link: ← Back to home
+  Label: Legal
+  Title: Privacy Policy.
+
+=== ACCESSIBILITY LABELS ===
+Skip to content
+NOREX Home
+Toggle language
+Toggle sound
+Toggle theme
+Toggle menu
+Terminal command
+
+=== ARIA LABELS / ROLES ===
+Main navigation
+progressbar (preloader)
+dialog (cookie banner)
+
+=== CONSOLE LOG ===
+NOREX - System ready.
+
+=== TECHNICAL TERMS (NOT TRANSLATED) ===
+NOREX
+ASTRYX
+ACPI
+AML
+UEFI
+GOP
+ELF
+COW (Copy on Write)
+IPv4
+IPv6
+TCP
+UDP
+xHCI
+HID
+NVMe
+PCI
+USB
+VFS
+x86_64
+powerd
+secd
+hotplugd
+Scheduler
+Compositor
+Buddy allocator
+
+=== EMAIL SUBJECT FORMAT ===
+[NOREX] {subject}: {name}
+
+=== EMAIL BODY FORMAT ===
+From: {name} ({email})
+
+Message:
+{message}
